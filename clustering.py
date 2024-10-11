@@ -42,8 +42,8 @@ df['Cluster'] = kmeans.labels_
 # Visualizar los resultados en un gráfico de dispersión
 plt.figure(figsize=(10, 6))
 plt.scatter(df['Precio Normal'], np.arange(len(df)), c=df['Cluster'], cmap='viridis', alpha=0.5)
-plt.title('Clustering de Productos por Precio Normal')
-plt.xlabel('Precio Normal')
+plt.title('Clustering de Productos por Precio')
+plt.xlabel('Precio')
 plt.ylabel('Índice de Producto')
 plt.colorbar(label='Cluster')
 plt.grid(True)
