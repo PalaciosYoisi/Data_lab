@@ -2,27 +2,26 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import logging
-import csv  # Importar biblioteca para escribir en CSV
-import mysql.connector  # Importar la biblioteca para conectar a la base de datos
-
+import csv  
+import mysql.connector 
 # Configurar logging
 logging.basicConfig(
-    filename='extraccion_productos.log',  # Archivo de logs
-    level=logging.INFO,  # Nivel de logging (puedes cambiarlo a DEBUG para más detalle)
-    format='%(asctime)s - %(levelname)s - %(message)s',  # Formato de los logs
-    datefmt='%Y-%m-%d %H:%M:%S'  # Formato de la fecha
+    filename='extraccion_productos.log',  
+    level=logging.INFO,  
+    format='%(asctime)s - %(levelname)s - %(message)s', 
+    datefmt='%Y-%m-%d %H:%M:%S' 
 )
 
 # Conexión a la base de datos
 db_connection = mysql.connector.connect(
     host='localhost',
-    user='root',  # Cambia 'tu_usuario' por tu usuario de MySQL
-    password='',  # Cambia 'tu_contraseña' por tu contraseña de MySQL
+    user='root', 
+    password='', 
     database='offcorss_data'
 )
 db_cursor = db_connection.cursor()
 
-# Función para extraer información de una página específica
+
 def extraer_productos(url):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
@@ -35,7 +34,7 @@ def extraer_productos(url):
         soup = BeautifulSoup(response.content, 'html.parser')
         container = soup.select_one('#gallery-layout-container')
 
-        # Verificar si se encontró el contenedor
+       
         if container:
             items = container.find_all('div', recursive=False)
             logging.info(f"Se encontraron {len(items)} productos en la página.")
